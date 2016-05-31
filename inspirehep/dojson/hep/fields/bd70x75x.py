@@ -24,9 +24,8 @@
 
 from dojson import utils
 
-from inspirehep.dojson import utils as inspire_dojson_utils
-
 from ..model import hep, hep2marc
+from ...utils import get_record_ref, remove_duplicates_from_list_of_dicts
 
 
 @hep.over('thesis_supervisor', '^701..')
@@ -69,12 +68,11 @@ def collaboration(self, key, value):
                 pass
         return {
             'value': value.get('g'),
-            'record': inspire_dojson_utils.get_record_ref(recid, 'experiments')
+            'record': get_record_ref(recid, 'experiments')
         }
     collaboration = self.get('collaboration', [])
 
-    filtered_value = inspire_dojson_utils.remove_duplicates_from_list_of_dicts(
-        value)
+    filtered_value = remove_duplicates_from_list_of_dicts(value)
     for element in filtered_value:
         collaboration.append(get_value(element))
 

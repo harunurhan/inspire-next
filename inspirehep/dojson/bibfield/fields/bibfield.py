@@ -22,16 +22,15 @@
 
 """Legacy workflow metadata in BibField conversion to updated data model."""
 
-from __future__ import absolute_import, print_function, unicode_literals
+from __future__ import absolute_import, division, print_function
 
 import dateutil
 import six
 
 from dojson import utils
 
-from inspirehep.dojson import utils as inspire_dojson_utils
-
 from ..model import bibfield
+from ...utils import get_record_ref
 
 
 @bibfield.over('abstracts', '^abstract$')
@@ -287,7 +286,7 @@ def thesis_supervisor(self, key, value):
     for val in value:
         out.append({
             "full_name": val.get('full_name'),
-            "record": inspire_dojson_utils.get_record_ref(
+            "record": get_record_ref(
                 val.get('external_id'), 'literature'),
             "affiliation": {
                 "value": val.get('affiliation')
