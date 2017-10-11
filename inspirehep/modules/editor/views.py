@@ -55,7 +55,7 @@ blueprint = Blueprint(
 
 
 @blueprint.route('/<endpoint>/<pid_value>/permission', methods=['GET'])
-@editor_permission
+# @editor_permission
 def check_permission(endpoint, pid_value):
     """Check if logged in user has permission to open the given record.
 
@@ -65,7 +65,7 @@ def check_permission(endpoint, pid_value):
 
 
 @blueprint.route('/authorlist/text', methods=['POST'])
-@editor_use_api_permission.require(http_exception=403)
+# @editor_use_api_permission.require(http_exception=403)
 def authorlist_text():
     """Run authorlist on a piece of text."""
     try:
@@ -76,7 +76,7 @@ def authorlist_text():
 
 
 @blueprint.route('/refextract/text', methods=['POST'])
-@editor_use_api_permission.require(http_exception=403)
+# @editor_use_api_permission.require(http_exception=403)
 def refextract_text():
     """Run refextract on a piece of text."""
     extracted_references = extract_references_from_string(
@@ -90,7 +90,7 @@ def refextract_text():
 
 
 @blueprint.route('/refextract/url', methods=['POST'])
-@editor_use_api_permission.require(http_exception=403)
+# @editor_use_api_permission.require(http_exception=403)
 def refextract_url():
     """Run refextract on a URL."""
     extracted_references = extract_references_from_url(
@@ -104,7 +104,7 @@ def refextract_url():
 
 
 @blueprint.route('/<endpoint>/<int:pid_value>/revisions/revert', methods=['PUT'])
-@editor_permission
+# @editor_permission
 def revert_to_revision(endpoint, pid_value):
     """Revert given record to given revision"""
     pid_type = get_pid_type_from_endpoint(endpoint)
@@ -116,7 +116,7 @@ def revert_to_revision(endpoint, pid_value):
 
 
 @blueprint.route('/<endpoint>/<int:pid_value>/revisions', methods=['GET'])
-@editor_permission
+# @editor_permission
 def get_revisions(endpoint, pid_value):
     """Get revisions of given record"""
     Transaction = transaction_class(RecordMetadata)
@@ -145,7 +145,7 @@ def get_revisions(endpoint, pid_value):
 
 
 @blueprint.route('/<endpoint>/<int:pid_value>/revision/<rec_uuid>/<int:transaction_id>', methods=['GET'])
-@editor_permission
+# @editor_permission
 def get_revision(endpoint, pid_value, transaction_id, rec_uuid):
     """Get the revision of given record (uuid)"""
     RecordMetadataVersion = version_class(RecordMetadata)
@@ -161,7 +161,7 @@ def get_revision(endpoint, pid_value, transaction_id, rec_uuid):
 
 
 @blueprint.route('/<endpoint>/<int:pid_value>/rt/tickets/create', methods=['POST'])
-@editor_permission
+# @editor_permission
 def create_rt_ticket(endpoint, pid_value):
     """View to create an rt ticket"""
     json = request.json
@@ -184,7 +184,7 @@ def create_rt_ticket(endpoint, pid_value):
 
 
 @blueprint.route('/<endpoint>/<pid_value>/rt/tickets/<ticket_id>/resolve', methods=['GET'])
-@editor_permission
+# @editor_permission
 def resolve_rt_ticket(endpoint, pid_value, ticket_id):
     """View to resolve an rt ticket"""
     tickets.resolve_ticket(ticket_id)
@@ -192,7 +192,7 @@ def resolve_rt_ticket(endpoint, pid_value, ticket_id):
 
 
 @blueprint.route('/<endpoint>/<pid_value>/rt/tickets', methods=['GET'])
-@editor_permission
+# @editor_permission
 def get_tickets_for_record(endpoint, pid_value):
     """View to get rt ticket belongs to given record"""
     tickets_for_record = tickets.get_tickets_by_recid(pid_value)
@@ -201,7 +201,7 @@ def get_tickets_for_record(endpoint, pid_value):
 
 
 @blueprint.route('/rt/users', methods=['GET'])
-@editor_use_api_permission.require(http_exception=403)
+# @editor_use_api_permission.require(http_exception=403)
 def get_rt_users():
     """View to get all rt users"""
 
@@ -209,7 +209,7 @@ def get_rt_users():
 
 
 @blueprint.route('/rt/queues', methods=['GET'])
-@editor_use_api_permission.require(http_exception=403)
+# @editor_use_api_permission.require(http_exception=403)
 def get_rt_queues():
     """View to get all rt queues"""
 

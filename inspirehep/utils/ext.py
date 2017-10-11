@@ -53,6 +53,7 @@ class INSPIREUtils(object):
                 url=url,
                 default_login=login,
                 default_password=password,
+                verify_cert=False,
             )
             loggedin = tracker.login()
             if not loggedin:
